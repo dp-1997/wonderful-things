@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tiempos+Headline:wght@400;500&family=Styrene+A:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #f0ebe3;
+      --cream-dark: #e8e1d7;
+      --rust: #c4603a;
+      --rust-hover: #b05430;
+      --charcoal: #1a1714;
+      --muted: #6b6560;
+      --border: #d8d2c8;
+      --white: #ffffff;
+      --input-bg: #faf8f5;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--cream);
+      font-family: 'Styrene A', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--charcoal);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      color: var(--charcoal);
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      color: var(--rust);
+    }
+
+    .logo-name {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Main layout ── */
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: center;
+      padding: 40px 80px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* ── Left: Headline ── */
+    .hero {
+      padding-right: 60px;
+    }
+
+    .hero h1 {
+      font-family: 'Tiempos Headline', Georgia, 'Times New Roman', serif;
+      font-size: clamp(40px, 5vw, 62px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 340px;
+    }
+
+    /* ── Right: Form card ── */
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.04),
+        0 4px 16px rgba(0,0,0,0.06),
+        0 12px 40px rgba(0,0,0,0.04);
+      width: 100%;
+      max-width: 400px;
+      justify-self: center;
+    }
+
+    .card-title {
+      font-family: 'Tiempos Headline', Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 28px;
+      color: var(--charcoal);
+      letter-spacing: -0.01em;
+    }
+
+    /* Google button */
+    .btn-google {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: var(--white);
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--charcoal);
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      font-family: inherit;
+    }
+
+    .btn-google:hover {
+      background: var(--input-bg);
+      border-color: #c0b8ae;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .google-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider span {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Input */
+    .input-group {
+      margin-bottom: 12px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: var(--input-bg);
+      font-size: 14.5px;
+      color: var(--charcoal);
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input[type="email"]::placeholder {
+      color: #a49e97;
+    }
+
+    input[type="email"]:focus {
+      border-color: #a8a096;
+      box-shadow: 0 0 0 3px rgba(196, 96, 58, 0.08);
+    }
+
+    /* Primary button */
+    .btn-primary {
+      width: 100%;
+      padding: 13px 20px;
+      background: var(--rust);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-size: 14.5px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary:hover {
+      background: var(--rust-hover);
+      box-shadow: 0 4px 12px rgba(196, 96, 58, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
+    }
+
+    /* Footer note */
+    .card-footer {
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .card-footer a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .card-footer a:hover {
+      color: var(--charcoal);
+    }
+
+    /* ── Bottom learn more ── */
+    .learn-more {
+      text-align: center;
+      padding: 0 0 48px;
+    }
+
+    .learn-more a {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s ease;
+    }
+
+    .learn-more a:hover {
+      color: var(--charcoal);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      main {
+        grid-template-columns: 1fr;
+        padding: 20px 24px 60px;
+        gap: 40px;
+      }
+
+      .hero {
+        padding-right: 0;
+        text-align: center;
+      }
+
+      .hero p {
+        max-width: 100%;
+      }
+
+      .card {
+        max-width: 100%;
+      }
+
+      header {
+        padding: 20px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="#" class="logo">
+      <!-- Claude asterisk mark -->
+      <svg class="logo-mark" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M14 2L14 10M14 18L14 26M2 14L10 14M18 14L26 14M4.93 4.93L10.61 10.61M17.39 17.39L23.07 23.07M23.07 4.93L17.39 10.61M10.61 17.39L4.93 23.07"
+          stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-name">Claude</span>
+    </a>
+  </header>
+
+  <main>
+    <!-- Left -->
+    <div class="hero">
+      <h1>Your ideas,<br />amplified.</h1>
+      <p>Privacy-first AI that helps you create in confidence.</p>
+    </div>
+
+    <!-- Right -->
+    <div class="card">
+      <p class="card-title">Welcome back</p>
+
+      <button class="btn-google" type="button">
+        <!-- Google logo SVG -->
+        <svg class="google-icon" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+          <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+          <path d="M3.964 10.706A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.038l3.007-2.332z" fill="#FBBC05"/>
+          <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.962L3.964 7.294C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <div class="divider"><span>or</span></div>
+
+      <div class="input-group">
+        <input type="email" placeholder="Enter your personal or work email" />
+      </div>
+
+      <button class="btn-primary" type="button">Continue with email</button>
+
+      <p class="card-footer">
+        By continuing, you agree to our
+        <a href="#">Terms of Service</a> and
+        <a href="#">Privacy Policy</a>.
+      </p>
+    </div>
+  </main>
+
+  <div class="learn-more">
+    <a href="#">Learn more <span>↓</span></a>
+  </div>
+
+</body>
+</html>
