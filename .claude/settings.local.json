@@ -6,7 +6,8 @@
       "Bash(git config --global user.name)",
       "Bash(git config --global user.email)",
       "Bash(git config --global user.name \"Damian Pickett\")",
-      "Bash(git config --global user.email \"damianpickett1997@gmail.com\")"
+      "Bash(git config --global user.email \"damianpickett1997@gmail.com\")",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }
