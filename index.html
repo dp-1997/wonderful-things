@@ -271,6 +271,156 @@
       color: var(--charcoal);
     }
 
+    /* ── Survey Demo ── */
+    .survey-demo {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.04),
+        0 4px 16px rgba(0,0,0,0.06),
+        0 12px 40px rgba(0,0,0,0.04);
+      margin-top: 28px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .demo-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .demo-label::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rust);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .demo-question {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .demo-options {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .demo-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      font-size: 13px;
+      color: var(--charcoal);
+      background: var(--input-bg);
+      transition: border-color 0.3s ease, background 0.3s ease;
+      cursor: default;
+    }
+
+    .demo-option.selected {
+      border-color: var(--rust);
+      background: #fdf3ee;
+    }
+
+    .demo-radio {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+      transition: border-color 0.3s ease, background 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .demo-option.selected .demo-radio {
+      border-color: var(--rust);
+      background: var(--rust);
+    }
+
+    .demo-radio-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .demo-option.selected .demo-radio-dot {
+      opacity: 1;
+    }
+
+    /* Logic connector */
+    .logic-connector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 14px 0;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .logic-connector.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .logic-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--rust), var(--border));
+    }
+
+    .logic-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--rust);
+      background: #fdf3ee;
+      border: 1px solid #f0cfc0;
+      border-radius: 4px;
+      padding: 2px 7px;
+    }
+
+    /* Follow-up question */
+    .demo-followup {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.4s ease;
+    }
+
+    .demo-followup.visible {
+      max-height: 200px;
+      opacity: 1;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
       main {
@@ -314,8 +464,54 @@
   <main>
     <!-- Left -->
     <div class="hero">
-      <h1>Your ideas,<br />amplified.</h1>
-      <p>Privacy-first AI that helps you create in confidence.</p>
+      <h1>Build beautiful<br />surveys.</h1>
+
+      <!-- Survey Logic Demo -->
+      <div class="survey-demo">
+        <div class="demo-label">Display logic · live preview</div>
+
+        <div class="demo-question" id="q1-text">How satisfied are you with our product?</div>
+        <div class="demo-options" id="q1-options">
+          <div class="demo-option" id="opt-very">
+            <div class="demo-radio"><div class="demo-radio-dot"></div></div>
+            Very satisfied
+          </div>
+          <div class="demo-option" id="opt-some">
+            <div class="demo-radio"><div class="demo-radio-dot"></div></div>
+            Somewhat satisfied
+          </div>
+          <div class="demo-option" id="opt-not">
+            <div class="demo-radio"><div class="demo-radio-dot"></div></div>
+            Not satisfied
+          </div>
+        </div>
+
+        <!-- Logic connector -->
+        <div class="logic-connector" id="logic-connector">
+          <div class="logic-line"></div>
+          <div class="logic-tag">if "Not satisfied" → show</div>
+          <div class="logic-line"></div>
+        </div>
+
+        <!-- Follow-up question -->
+        <div class="demo-followup" id="followup">
+          <div class="demo-question">What could we improve?</div>
+          <div class="demo-options">
+            <div class="demo-option" id="opt-speed">
+              <div class="demo-radio"><div class="demo-radio-dot"></div></div>
+              Speed &amp; performance
+            </div>
+            <div class="demo-option" id="opt-price">
+              <div class="demo-radio"><div class="demo-radio-dot"></div></div>
+              Pricing
+            </div>
+            <div class="demo-option" id="opt-support">
+              <div class="demo-radio"><div class="demo-radio-dot"></div></div>
+              Customer support
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Right -->
@@ -353,5 +549,57 @@
     <a href="#">Learn more <span>↓</span></a>
   </div>
 
+  <script>
+    const options = ['opt-very', 'opt-some', 'opt-not'];
+    const followupOptions = ['opt-speed', 'opt-price', 'opt-support'];
+    let step = 0;
+
+    function clearAll() {
+      options.forEach(id => document.getElementById(id).classList.remove('selected'));
+      followupOptions.forEach(id => document.getElementById(id).classList.remove('selected'));
+      document.getElementById('logic-connector').classList.remove('visible');
+      document.getElementById('followup').classList.remove('visible');
+    }
+
+    function runCycle() {
+      // Step 0: select "Not satisfied" → show logic + follow-up
+      if (step === 0) {
+        clearAll();
+        setTimeout(() => {
+          document.getElementById('opt-not').classList.add('selected');
+        }, 400);
+        setTimeout(() => {
+          document.getElementById('logic-connector').classList.add('visible');
+        }, 900);
+        setTimeout(() => {
+          document.getElementById('followup').classList.add('visible');
+        }, 1300);
+        setTimeout(() => {
+          document.getElementById('opt-support').classList.add('selected');
+        }, 2200);
+        step = 1;
+      }
+      // Step 1: switch to "Very satisfied" → hide follow-up
+      else if (step === 1) {
+        clearAll();
+        setTimeout(() => {
+          document.getElementById('opt-very').classList.add('selected');
+        }, 400);
+        step = 2;
+      }
+      // Step 2: switch to "Somewhat satisfied" → hide follow-up
+      else if (step === 2) {
+        clearAll();
+        setTimeout(() => {
+          document.getElementById('opt-some').classList.add('selected');
+        }, 400);
+        step = 0;
+      }
+    }
+
+    // Kick off
+    runCycle();
+    setInterval(runCycle, 4000);
+  </script>
 </body>
 </html>
